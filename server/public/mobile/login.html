@@ -114,6 +114,8 @@
 			</form>
 			<div class="mui-content-padded">
 				<button id='loginBtn' class="mui-btn mui-btn-block mui-btn-primary">登录</button>
+				<div class="link-area"><a id='reg'>注册账号</a> <span class="spliter">|</span> <a id='forgetPassword'>忘记密码</a>
+				</div>
 				<div class="link-area"><section class="login_footer">
 <!--
         <div class="container">
@@ -152,6 +154,13 @@
             mui("body").on("tap","#loginBtn",function(e){
                 login();
             });
+
+            mui("body").on("tap","#reg",function(e){
+                showMessage('内测期间，请在群内@完美小盒子开通');
+            });
+            mui("body").on("tap","#forgetPassword",function(e){
+                showMessage('内测期间，请在群内@完美小盒子x');
+            });
             
             var session = Storage.get('session');
             if(session){
@@ -176,6 +185,11 @@
                 location = "main.html";
                 this._pending_login.options.text = '登录成功';
                 this._pending_login.pending();
+                var that = this;
+                setTimeout(function(){
+                    that._pending_login.ok();
+                    $('#loginBtn').text('登录');
+                },1000);
             },function(res){
                 mui.toast(res.message);
                 this._pending_login.ok();

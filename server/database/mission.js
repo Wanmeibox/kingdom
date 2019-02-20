@@ -104,7 +104,7 @@ module.exports = {
             return false;
         }
     },
-    getMissions : async function(groupid){
+    getMissions1 : async function(groupid){
         var sql = 'select * from mission';
         if(groupid){
             sql += ' where groupid=@groupid;'
@@ -112,6 +112,22 @@ module.exports = {
         var result;
         try{
             result = await base.execSqlByParam(sql,{groupid:groupid});
+        }catch(ex){
+            console.log(ex)
+        }
+        
+        if(result){
+            return result;
+        }else{
+            return false;
+        }
+    },
+    getMissions : async function(user,date){
+        var sql = 'SELECT mission.*,ifnull(missionlog.missionstate,0) as missionstate,ifnull(missionlog.missionlogdate,date(@date)) as missionlogdate FROM mission left join missionlog on mission.id = missionlog.missionid and missionlogdate = @date and missionlog.userid = @id where mission.groupid=@groupid;';
+        user.date = date;
+        var result;
+        try{
+            result = await base.execSqlByParam(sql,user);
         }catch(ex){
             console.log(ex)
         }

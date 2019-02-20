@@ -223,26 +223,24 @@ body {
     float: right;
     margin-right: 20px;
 }
-[missionstate="0"]
-.missionstate:before{
-    content: '去完成';
-    color: crimson;
-}
-[missionstate="1"]
-.missionstate:before{
-    content: '审核中';
-    color:coral;
-}
-[missionstate="2"]
-.missionstate:before{
-    content: '已完成';
-    color:forestgreen;
-}
+[missionstate="0"] .missionstate:before{content: '去完成';color: crimson;}
+[missionstate="1"] .missionstate:before{content: '审核中';color:coral;}
+[missionstate="2"] .missionstate:before{content: '已完成';color:forestgreen;}
+
+#usermission [missionstate="0"] .missionstate:before{content: '未完成';color: crimson;}
+#usermission [missionstate="1"] .missionstate:before{content: '待审核';color:coral;}
+#usermission [missionstate="2"] .missionstate:before{content: '已完成';color:forestgreen;}
+
+
+#users [missionstate="0"] .missionstate:before{content: '未完成';color: crimson;}
+#users [missionstate="1"] .missionstate:before{content: '待审核';color:coral;}
+#users [missionstate="2"] .missionstate:before{content: '已完成';color:forestgreen;}
 
 
 #screenshotList img{width: 100%;}
 
-#missionState.missionstate0{content: '任务未提交';color: crimson;}
-#missionState.missionstate1{content: '已提交任务，请等待审核';color: coral;}
-#missionState.missionstate2{content: '已完成任务';color: forestgreen;}
+#missionState.missionstate0:before{content: '任务未提交';color: crimson;}
+#missionState.missionstate1:before{content: '已提交任务，请等待审核';color: coral;}
+#missionState.missionstate2:before{content: '已完成任务';color: forestgreen;}
 
+#verify .state0{display: none;}

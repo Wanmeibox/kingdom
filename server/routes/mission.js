@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var missionDB = require('./../database/mission');
+var userDB = require('./../database/users');
 var model = require('./model');
 
 /* GET users listing. */
@@ -19,14 +20,25 @@ router.get('/getMission',async function(req, res, next) {
 });
 
 router.get('/getMissions',async function(req, res, next) {
-    var user = model.getUser(req);
-    var mission = await missionDB.getMissions(user.groupid);
+    var id = req.query.userid;
+    if(!id || parseInt(id) != id){
+        res.send(model.error(200))
+        return;
+    }
+    var missionlogdate = req.query.missionlogdate;
+    if(!missionlogdate){
+        missionlogdate = new Date().getFullYear() + '-' + (new Date().getMonth()+1) + '-' + new Date().getDate();
+    }
+    var user = await userDB.getUser(id);
+    console.log(user)
+    var mission = await missionDB.getMissions(user,missionlogdate);
     if(mission){
         res.send(model.success(mission))
     }else{
         res.send(model.error(201))
     }
 });
+
 router.get('/getMyMissions',async function(req, res, next) {
     var user = model.getUser(req);
     var missionlogdate = req.query.missionlogdate;

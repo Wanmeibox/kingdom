@@ -902,7 +902,7 @@ String.prototype.replaceAll = function(oldValue,newValue){
 String.prototype.toObject = function(obj,before,after){
     var string = this.toString();
     for(var key in obj){
-        string = string.replaceAll((before || '{') + key + (after || '}'),obj[key].toString());
+        string = string.replaceAll((before || '{') + key + (after || '}'),((obj[key] === undefined || obj[key] === null) ? "" : obj[key]).toString());
     }
     return string;
 }

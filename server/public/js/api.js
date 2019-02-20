@@ -101,6 +101,10 @@ function getGeneralData() {
     'api/mission/changeMissionLogState',
     'api/mission/addSrceenShots',
     
+    //group,member
+    'api/group/getLeaderGroups',
+    'api/group/getGroupMembers',
+    
     //微信相关
     'api/wechat/signature'                        
 ].forEach(function(item){
